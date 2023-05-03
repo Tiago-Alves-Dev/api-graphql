@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RoomDto {
+  createdAt: String
+  createdBy: String
+  updatedAt: String
+  updatedBy: String
+  deletedAt: String
+  deletedBy: String
+  roomId: ID!
+  name: String!
+  description: String!
+  image: String
+  period: String!
+  hourStart: String
+  hourEnd: String
+  isActive: Boolean!
+}
+
+type Query {
+  rooms: [RoomDto!]!
+  room(roomId: String!): RoomDto!
+}
+
+type Mutation {
+  createRoom(data: CreateRoomInput!): RoomDto!
+  updateRoom(roomId: String!, data: UpdateRoomInput!): Boolean!
+  removeRoom(roomId: String!): Boolean!
+}
+
+input CreateRoomInput {
+  name: String!
+  description: String!
+  image: String
+  period: String!
+  hourStart: String
+  hourEnd: String
+  isActive: Boolean
+}
+
+input UpdateRoomInput {
+  name: String
+  description: String
+  image: String
+  period: String
+  hourStart: String
+  hourEnd: String
+  isActive: Boolean
+}
