@@ -1,5 +1,6 @@
-import { AuditEntity } from 'src/modules/shared/entities/audit.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { StudentEntity } from 'src/shared/entities';
+import { AuditEntity } from 'src/shared/entities/audit.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('ROOM')
 export class RoomEntity extends AuditEntity {
@@ -26,4 +27,11 @@ export class RoomEntity extends AuditEntity {
 
   @Column({ name: 'IS_ACTIVE', default: true })
   isActive: boolean;
+
+  /**
+   * ENTITY RELATIONS
+   */
+
+  @OneToMany(() => StudentEntity, (student) => student.room)
+  students?: StudentEntity[];
 }

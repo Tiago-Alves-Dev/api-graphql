@@ -2,6 +2,35 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type StudentDto {
+  createdAt: String
+  createdBy: String
+  updatedAt: String
+  updatedBy: String
+  deletedAt: String
+  deletedBy: String
+  studentId: ID!
+  roomId: String!
+  registration: String!
+  name: String!
+  age: Float!
+  birth: String!
+  email: String!
+  phone: String!
+  mother: String!
+  father: String!
+  photo: String
+  cpf: String!
+  address: String
+  addressNumber: Float
+  addressComplement: String
+  district: String
+  zipcode: String
+  city: String
+  state: String
+  room: RoomDto
+}
+
 type RoomDto {
   createdAt: String
   createdBy: String
@@ -17,17 +46,23 @@ type RoomDto {
   hourStart: String
   hourEnd: String
   isActive: Boolean!
+  students: [StudentDto!]
 }
 
 type Query {
   rooms: [RoomDto!]!
   room(roomId: String!): RoomDto!
+  students: [StudentDto!]!
+  student(studentId: String!): StudentDto!
 }
 
 type Mutation {
   createRoom(data: CreateRoomInput!): RoomDto!
   updateRoom(roomId: String!, data: UpdateRoomInput!): Boolean!
   removeRoom(roomId: String!): Boolean!
+  createStudent(data: CreateStudentInput!): StudentDto!
+  updateStudent(studentId: String!, data: UpdateStudentInput!): StudentDto!
+  removeStudent(studentId: String!): StudentDto!
 }
 
 input CreateRoomInput {
@@ -41,6 +76,12 @@ input CreateRoomInput {
 }
 
 input UpdateRoomInput {
+  createdAt: String
+  createdBy: String
+  updatedAt: String
+  updatedBy: String
+  deletedAt: String
+  deletedBy: String
   name: String
   description: String
   image: String
@@ -48,4 +89,52 @@ input UpdateRoomInput {
   hourStart: String
   hourEnd: String
   isActive: Boolean
+}
+
+input CreateStudentInput {
+  roomId: ID!
+  registration: String!
+  name: String!
+  age: Float!
+  birth: String!
+  email: String!
+  phone: String!
+  mother: String!
+  father: String!
+  photo: String
+  cpf: String!
+  address: String
+  addressNumber: Float
+  addressComplement: String
+  district: String
+  zipcode: String
+  city: String
+  state: String
+}
+
+input UpdateStudentInput {
+  createdAt: String
+  createdBy: String
+  updatedAt: String
+  updatedBy: String
+  deletedAt: String
+  deletedBy: String
+  roomId: ID
+  registration: String
+  name: String
+  age: Float
+  birth: String
+  email: String
+  phone: String
+  mother: String
+  father: String
+  photo: String
+  cpf: String
+  address: String
+  addressNumber: Float
+  addressComplement: String
+  district: String
+  zipcode: String
+  city: String
+  state: String
 }

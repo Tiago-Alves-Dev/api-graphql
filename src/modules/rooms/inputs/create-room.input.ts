@@ -1,5 +1,4 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { RoomDto } from '../dto/room.dto';
 import {
   IsNotEmpty,
   IsString,
@@ -7,9 +6,10 @@ import {
   IsOptional,
   IsEmpty,
 } from 'class-validator';
+import { AuditDto } from 'src/shared/dtos/audit.dto';
 
 @InputType()
-export class CreateRoomInput extends RoomDto {
+export class CreateRoomInput extends AuditDto {
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
@@ -29,6 +29,7 @@ export class CreateRoomInput extends RoomDto {
   @IsNotEmpty()
   @Field(() => String)
   period: string;
+  // @IsIn(['COUPON', 'REVERSAL', 'OTHER'])
 
   @IsString()
   @IsOptional()

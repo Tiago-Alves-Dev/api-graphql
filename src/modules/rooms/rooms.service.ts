@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { RoomRepository } from '../shared/repositories';
+import { RoomRepository } from 'src/shared/repositories';
 import { RoomDto } from './dto/room.dto';
 
 @Injectable()
@@ -12,11 +12,18 @@ export class RoomsService {
   }
 
   async findAll(): Promise<RoomDto[]> {
-    return await this.repository.findAll({});
+    return await this.repository.findAll({
+      relations: ['students'],
+      order: { createdAt: 'DESC' },
+    });
   }
 
   async findOne(roomId: string): Promise<RoomDto> {
-    const room = await this.repository.findOne({ where: { roomId } });
+    const room = await this.repository.findOne({
+      where: { roomId },
+      relations: ['students'],
+      order: { createdAt: 'DESC' },
+    });
 
     if (!room) {
       throw new NotFoundException('ROOM_NOT_FOUND');

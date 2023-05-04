@@ -10,8 +10,8 @@ export class RoomsResolver {
   constructor(private readonly roomsService: RoomsService) {}
 
   @Mutation(() => RoomDto)
-  createRoom(@Args('data') data: CreateRoomInput) {
-    return this.roomsService.create({ ...data });
+  async createRoom(@Args('data') data: CreateRoomInput): Promise<RoomDto> {
+    return await this.roomsService.create({ ...data });
   }
 
   @Query(() => [RoomDto])
