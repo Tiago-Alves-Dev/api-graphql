@@ -65,7 +65,6 @@ type UserDto {
   userId: ID!
   name: String!
   email: String!
-  password: String!
   isActive: Boolean
   phone: String!
 }

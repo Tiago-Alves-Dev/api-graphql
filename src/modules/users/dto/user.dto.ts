@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { AuditDto } from 'src/shared/dtos/audit.dto';
 
 @ObjectType()
@@ -12,7 +12,7 @@ export class UserDto extends AuditDto {
   @Field(() => String)
   email: string;
 
-  @Field(() => String)
+  @HideField()
   password: string;
 
   @Field(() => Boolean, { nullable: true })
