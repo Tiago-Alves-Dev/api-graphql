@@ -13,6 +13,11 @@ import { AuditDto } from 'src/shared/dtos/audit.dto';
 @InputType()
 export class CreateStudentInput extends AuditDto {
   @IsUUID()
+  @IsOptional()
+  @Field(() => ID, { nullable: true })
+  studentId?: string;
+
+  @IsUUID()
   @IsNotEmpty()
   @Field(() => ID)
   roomId: string;

@@ -1,11 +1,12 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { StudentDto } from 'src/modules/students/dto/student.dto';
 import { AuditDto } from 'src/shared/dtos/audit.dto';
+import { RomPeriodEnum } from 'src/shared/enums/room-period.enum';
 
 @ObjectType()
 export class RoomDto extends AuditDto {
   @Field(() => ID)
-  roomId: string;
+  roomId?: string;
 
   @Field(() => String)
   name: string;
@@ -16,8 +17,8 @@ export class RoomDto extends AuditDto {
   @Field(() => String, { nullable: true })
   image?: string;
 
-  @Field(() => String)
-  period: string;
+  @Field(() => RomPeriodEnum, { nullable: true })
+  period: RomPeriodEnum;
 
   @Field(() => String, { nullable: true })
   hourStart?: string;

@@ -4,7 +4,7 @@ import { AuditDto } from 'src/shared/dtos/audit.dto';
 @ObjectType()
 export class UserDto extends AuditDto {
   @Field(() => ID)
-  userId: string;
+  userId?: string;
 
   @Field(() => String)
   name: string;
@@ -16,10 +16,7 @@ export class UserDto extends AuditDto {
   password: string;
 
   @Field(() => Boolean, { nullable: true })
-  isActive: boolean;
-
-  @Field(() => String)
-  cpf: string;
+  isActive?: boolean;
 
   @Field(() => String)
   phone: string;

@@ -1,41 +1,44 @@
 import { InputType, Int, Field, ID } from '@nestjs/graphql';
-import { IsBoolean, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { AuditDto } from 'src/shared/dtos/audit.dto';
 
 @InputType()
 export class CreateUserInput extends AuditDto {
   @IsUUID()
-  @IsNotEmpty()
-  @Field(() => ID)
-  userId: string;
+  @IsOptional()
+  @Field(() => ID, { nullable: true })
+  userId?: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Invalid characters' })
   @Field(() => String)
   name: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsEmail()
+  @IsNotEmpty({ message: 'Invalid E-mail' })
   @Field(() => String)
   email: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Password is required' })
   @Field(() => String)
   password: string;
 
   @IsBoolean()
-  @IsNotEmpty()
+  @IsOptional()
   @Field(() => Boolean, { nullable: true })
-  isActive: boolean;
+  isActive?: boolean;
 
   @IsString()
-  @IsNotEmpty()
-  @Field(() => String)
-  cpf: string;
-
-  @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Phone is required' })
   @Field(() => String)
   phone: string;
 }

@@ -1,15 +1,24 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, ID } from '@nestjs/graphql';
 import {
   IsNotEmpty,
   IsString,
   IsBoolean,
   IsOptional,
   IsEmpty,
+  IsUUID,
+  IsIn,
+  IsEnum,
 } from 'class-validator';
 import { AuditDto } from 'src/shared/dtos/audit.dto';
+import { RomPeriodEnum } from 'src/shared/enums/room-period.enum';
 
 @InputType()
 export class CreateRoomInput extends AuditDto {
+  @IsUUID()
+  @IsOptional()
+  @Field(() => ID, { nullable: true })
+  roomId?: string;
+
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
@@ -25,11 +34,11 @@ export class CreateRoomInput extends AuditDto {
   @Field(() => String, { nullable: true })
   image?: string;
 
-  @IsString()
+  @IsEnum(RomPeriodEnum, { each: true })
   @IsNotEmpty()
-  @Field(() => String)
-  period: string;
-  // @IsIn(['COUPON', 'REVERSAL', 'OTHER'])
+  @IsOptional()
+  @Field(() => RomPeriodEnum, { nullable: true })
+  period: RomPeriodEnum;
 
   @IsString()
   @IsOptional()

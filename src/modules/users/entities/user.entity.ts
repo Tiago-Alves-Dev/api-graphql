@@ -1,8 +1,9 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, HideField } from '@nestjs/graphql';
+import { hashPasswordTransform } from 'src/common/transformers/crypto-transform';
 import { AuditEntity } from 'src/shared/entities/audit.entity';
-import { Column, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
-@ObjectType()
+@Entity('USERS')
 export class UserEntity extends AuditEntity {
   @PrimaryGeneratedColumn('uuid', { name: 'USER_ID' })
   userId: string;
@@ -15,15 +16,15 @@ export class UserEntity extends AuditEntity {
   @Column({ name: 'EMAIL', unique: true })
   email: string;
 
-  @Column({ name: 'PASSWORD' })
+  @Column({
+    transformer: hashPasswordTransform,
+    name: 'PASSWORD',
+  })
+  @HideField()
   password: string;
 
   @Column({ name: 'ISACTIVE', default: false })
   isActive: boolean;
-
-  @Index('user-cpf-idx')
-  @Column({ name: 'CPF', unique: true })
-  cpf: string;
 
   @Column({ name: 'PHONE', unique: true })
   phone: string;

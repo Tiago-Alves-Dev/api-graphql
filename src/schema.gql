@@ -42,11 +42,37 @@ type RoomDto {
   name: String!
   description: String!
   image: String
-  period: String!
+  period: RomPeriodEnum
   hourStart: String
   hourEnd: String
   isActive: Boolean!
   students: [StudentDto!]
+}
+
+enum RomPeriodEnum {
+  MORNING
+  AFTERNOON
+  NIGHT
+}
+
+type UserDto {
+  createdAt: String
+  createdBy: String
+  updatedAt: String
+  updatedBy: String
+  deletedAt: String
+  deletedBy: String
+  userId: ID!
+  name: String!
+  email: String!
+  password: String!
+  isActive: Boolean
+  phone: String!
+}
+
+type AuthDto {
+  user: UserDto!
+  token: String!
 }
 
 type Query {
@@ -54,22 +80,34 @@ type Query {
   room(roomId: String!): RoomDto!
   students: [StudentDto!]!
   student(studentId: String!): StudentDto!
+  users: [UserDto!]!
+  user(userId: String!): UserDto!
 }
 
 type Mutation {
+  login(data: AuthInput!): AuthDto!
   createRoom(data: CreateRoomInput!): RoomDto!
   updateRoom(roomId: String!, data: UpdateRoomInput!): Boolean!
   removeRoom(roomId: String!): Boolean!
   createStudent(data: CreateStudentInput!): StudentDto!
-  updateStudent(studentId: String!, data: UpdateStudentInput!): StudentDto!
-  removeStudent(studentId: String!): StudentDto!
+  updateStudent(studentId: String!, data: UpdateStudentInput!): Boolean!
+  removeStudent(studentId: String!): Boolean!
+  createUser(data: CreateUserInput!): UserDto!
+  updateUser(userId: String!, data: UpdateUserInput!): Boolean!
+  removeUser(userId: String!): Boolean!
+}
+
+input AuthInput {
+  email: String!
+  password: String!
 }
 
 input CreateRoomInput {
+  roomId: ID
   name: String!
   description: String!
   image: String
-  period: String!
+  period: RomPeriodEnum
   hourStart: String
   hourEnd: String
   isActive: Boolean
@@ -82,16 +120,18 @@ input UpdateRoomInput {
   updatedBy: String
   deletedAt: String
   deletedBy: String
+  roomId: ID
   name: String
   description: String
   image: String
-  period: String
+  period: RomPeriodEnum
   hourStart: String
   hourEnd: String
   isActive: Boolean
 }
 
 input CreateStudentInput {
+  studentId: ID
   roomId: ID!
   registration: String!
   name: String!
@@ -119,6 +159,7 @@ input UpdateStudentInput {
   updatedBy: String
   deletedAt: String
   deletedBy: String
+  studentId: ID
   roomId: ID
   registration: String
   name: String
@@ -137,4 +178,28 @@ input UpdateStudentInput {
   zipcode: String
   city: String
   state: String
+}
+
+input CreateUserInput {
+  userId: ID
+  name: String!
+  email: String!
+  password: String!
+  isActive: Boolean
+  phone: String!
+}
+
+input UpdateUserInput {
+  createdAt: String
+  createdBy: String
+  updatedAt: String
+  updatedBy: String
+  deletedAt: String
+  deletedBy: String
+  userId: ID
+  name: String
+  email: String
+  password: String
+  isActive: Boolean
+  phone: String
 }

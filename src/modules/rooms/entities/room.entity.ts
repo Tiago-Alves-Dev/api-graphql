@@ -1,5 +1,6 @@
 import { StudentEntity } from 'src/shared/entities';
 import { AuditEntity } from 'src/shared/entities/audit.entity';
+import { RomPeriodEnum } from 'src/shared/enums/room-period.enum';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('ROOM')
@@ -16,8 +17,13 @@ export class RoomEntity extends AuditEntity {
   @Column({ name: 'IMAGE', nullable: true })
   image?: string;
 
-  @Column({ name: 'PERIOD' })
-  period: string;
+  @Column({
+    name: 'PERIOD',
+    type: 'enum',
+    enum: RomPeriodEnum,
+    default: RomPeriodEnum.MORNING,
+  })
+  period: RomPeriodEnum;
 
   @Column({ name: 'HOUR_START', type: 'time', nullable: true })
   hourStart?: string;

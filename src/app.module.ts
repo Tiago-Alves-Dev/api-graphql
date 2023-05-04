@@ -7,15 +7,13 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database';
 import { RoomsModule } from './modules/rooms/rooms.module';
 import { StudentsModule } from './modules/students/students.module';
-import { UsersModule } from './modules/-users/-users.module';
-import { UsersModule } from './users/users.module';
-import { UsersModule } from './module/users/users.module';
 import { UsersModule } from './modules/users/users.module';
-import { UsersModule } from './module/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
     RepositoryModule,
+    AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule(),
     GraphQLModule.forRoot<ApolloDriverConfig>({

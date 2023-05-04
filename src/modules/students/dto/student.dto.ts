@@ -5,7 +5,7 @@ import { AuditDto } from 'src/shared/dtos/audit.dto';
 @ObjectType()
 export class StudentDto extends AuditDto {
   @Field(() => ID)
-  studentId: string;
+  studentId?: string;
 
   @Field(() => String)
   roomId: string;

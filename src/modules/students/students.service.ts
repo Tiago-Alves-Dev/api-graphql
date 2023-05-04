@@ -50,14 +50,14 @@ export class StudentsService {
     return true;
   }
 
-  async remove(studentId: string): Promise<Boolean> {
+  async remove(studentId: string, userCurrent?: string): Promise<Boolean> {
     const student = await this.repository.findOne({ where: { studentId } });
 
     if (!student) {
       throw new NotFoundException('STUDENT_NOT_FOUND');
     }
 
-    await this.repository.softRemove({ ...student });
+    await this.repository.softRemove({ ...student, deletedBy: userCurrent });
 
     return true;
   }
