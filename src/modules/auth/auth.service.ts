@@ -28,11 +28,11 @@ export class AuthService {
       throw new NotFoundException('Incorrect password');
     }
 
-    const token = await this.jwtToken(user);
+    const accessToken = await this.jwtToken(user);
 
     return {
       user,
-      token,
+      accessToken,
     };
   }
 

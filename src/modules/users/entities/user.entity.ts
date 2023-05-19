@@ -28,4 +28,7 @@ export class UserEntity extends AuditEntity {
 
   @Column({ name: 'PHONE', unique: true })
   phone: string;
+
+  @Column({ name: 'IMAGE', nullable: true })
+  image?: string;
 }

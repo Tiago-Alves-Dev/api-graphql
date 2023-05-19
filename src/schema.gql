@@ -24,10 +24,10 @@ type StudentDto {
   address: String
   addressNumber: Float
   addressComplement: String
-  district: String
   zipcode: String
   city: String
   state: String
+  isActive: Boolean
   room: RoomDto
 }
 
@@ -67,11 +67,12 @@ type UserDto {
   email: String!
   isActive: Boolean
   phone: String!
+  image: String
 }
 
 type AuthDto {
   user: UserDto!
-  token: String!
+  accessToken: String!
 }
 
 type Query {
@@ -84,7 +85,7 @@ type Query {
 }
 
 type Mutation {
-  login(data: AuthInput!): AuthDto!
+  signIn(data: AuthInput!): AuthDto!
   createRoom(data: CreateRoomInput!): RoomDto!
   updateRoom(roomId: String!, data: UpdateRoomInput!): Boolean!
   removeRoom(roomId: String!): Boolean!
@@ -145,10 +146,10 @@ input CreateStudentInput {
   address: String
   addressNumber: Float
   addressComplement: String
-  district: String
   zipcode: String
   city: String
   state: String
+  isActive: Boolean
 }
 
 input UpdateStudentInput {
@@ -173,10 +174,10 @@ input UpdateStudentInput {
   address: String
   addressNumber: Float
   addressComplement: String
-  district: String
   zipcode: String
   city: String
   state: String
+  isActive: Boolean
 }
 
 input CreateUserInput {
@@ -186,6 +187,7 @@ input CreateUserInput {
   password: String!
   isActive: Boolean
   phone: String!
+  image: String
 }
 
 input UpdateUserInput {
@@ -201,4 +203,5 @@ input UpdateUserInput {
   password: String
   isActive: Boolean
   phone: String
+  image: String
 }

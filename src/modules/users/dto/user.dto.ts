@@ -20,4 +20,7 @@ export class UserDto extends AuditDto {
 
   @Field(() => String)
   phone: string;
+
+  @Field(() => String, { nullable: true })
+  image?: string;
 }

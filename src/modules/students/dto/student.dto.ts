@@ -35,7 +35,7 @@ export class StudentDto extends AuditDto {
   father: string;
 
   @Field(() => String, { nullable: true })
-  photo: string;
+  photo?: string;
 
   @Field(() => String)
   cpf: string;
@@ -50,9 +50,6 @@ export class StudentDto extends AuditDto {
   addressComplement?: string;
 
   @Field(() => String, { nullable: true })
-  district?: string;
-
-  @Field(() => String, { nullable: true })
   zipcode?: string;
 
   @Field(() => String, { nullable: true })
@@ -60,6 +57,9 @@ export class StudentDto extends AuditDto {
 
   @Field(() => String, { nullable: true })
   state?: string;
+
+  @Field(() => Boolean, { nullable: true })
+  isActive?: boolean;
 
   @Field(() => RoomDto, { nullable: true })
   room?: RoomDto;

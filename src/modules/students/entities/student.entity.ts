@@ -47,7 +47,7 @@ export class StudentEntity extends AuditEntity {
   father: string;
 
   @Column({ name: 'PHONTO', nullable: true })
-  photo: string;
+  photo?: string;
 
   @Index('student-cpf-idx')
   @Column({ name: 'CPF', unique: true })
@@ -62,9 +62,6 @@ export class StudentEntity extends AuditEntity {
   @Column({ name: 'ADDRESS_COMPLEMENT', nullable: true })
   addressComplement?: string;
 
-  @Column({ name: 'DISTRICT', nullable: true })
-  district?: string;
-
   @Column({ name: 'ZIPCODE', nullable: true })
   zipcode?: string;
 
@@ -73,6 +70,9 @@ export class StudentEntity extends AuditEntity {
 
   @Column({ name: 'STATE', nullable: true })
   state?: string;
+
+  @Column({ name: 'ISACTIVE', default: false })
+  isActive: boolean;
 
   /**
    * ENTITY RELATIONS

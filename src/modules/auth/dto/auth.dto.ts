@@ -7,5 +7,5 @@ export class AuthDto {
   user: UserDto;
 
   @Field(() => String)
-  token: string;
+  accessToken: string;
 }

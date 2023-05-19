@@ -41,4 +41,9 @@ export class CreateUserInput extends AuditDto {
   @IsNotEmpty({ message: 'Phone is required' })
   @Field(() => String)
   phone: string;
+
+  @IsString()
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  image?: string;
 }

@@ -1,6 +1,7 @@
 import { InputType, Int, Field, ID } from '@nestjs/graphql';
 import { StudentDto } from '../dto/student.dto';
 import {
+  IsBoolean,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -90,11 +91,6 @@ export class CreateStudentInput extends AuditDto {
   @IsString()
   @IsOptional()
   @Field(() => String, { nullable: true })
-  district?: string;
-
-  @IsString()
-  @IsOptional()
-  @Field(() => String, { nullable: true })
   zipcode?: string;
 
   @IsString()
@@ -106,4 +102,9 @@ export class CreateStudentInput extends AuditDto {
   @IsOptional()
   @Field(() => String, { nullable: true })
   state?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, { nullable: true })
+  isActive: boolean;
 }

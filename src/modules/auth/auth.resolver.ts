@@ -8,12 +8,12 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => AuthDto)
-  public async login(@Args('data') data: AuthInput): Promise<AuthDto> {
+  public async signIn(@Args('data') data: AuthInput): Promise<AuthDto> {
     const response = await this.authService.validateUser(data);
 
     return {
       user: response.user,
-      token: response.token,
+      accessToken: response.accessToken,
     };
   }
 }
